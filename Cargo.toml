@@ -1,0 +1,22 @@
+[package]
+name = "rust-book"
+version = "0.1.0"
+authors = ["nicolas <nicolas065@gmail.com>"]
+edition = "2018"
+description = "backend for employee management by a company"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "0.2", features = ["macros"] }
+warp = "0.2"
+serde = {version = "1.0", features = ["derive"] }
+serde_derive = "1.0"
+serde_json = "1.0"
+thiserror = "1.0"
+diesel = { version = "1.4.4", features = ["postgres", "r2d2"] }
+
+[dev-dependencies.cargo-husky]
+version = "1"
+default-features = false # Disable features which are enabled by default
+features = ["precommit-hook",  "run-cargo-fmt", "run-cargo-clippy"]
