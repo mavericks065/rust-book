@@ -1,7 +1,10 @@
 
-// use crate::{Result};
 use warp::{http::StatusCode, reject, reply::json, Reply, Rejection};
+use tokio::macros::support::Future;
 
-pub async fn health_handler() -> Result<impl Reply, Rejection> {
-    Ok(StatusCode::OK)
+use diesel::pg::PgConnection;
+
+pub fn health_handler() -> String {
+    let result =  "health check: all good";
+    result.to_string()
 }

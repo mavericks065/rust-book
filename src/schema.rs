@@ -7,5 +7,6 @@ table! {
         city -> Nullable<Varchar>,
         abn -> Nullable<Text>,
         country -> Nullable<Varchar>,
+        post_code -> Nullable<Int4>,
     }
 }

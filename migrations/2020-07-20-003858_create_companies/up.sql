@@ -6,5 +6,6 @@ CREATE TABLE companies (
   address TEXT,
   city VARCHAR ,
   abn TEXT,
-  country VARCHAR
+  country VARCHAR,
+  post_code integer
 );
