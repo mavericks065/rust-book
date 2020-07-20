@@ -9,6 +9,7 @@ table! {
         country -> Nullable<Varchar>,
         abn -> Nullable<Text>,
         ceo_id -> Nullable<Int4>,
+        created_at -> Nullable<Timestamp>,
     }
 }
 
@@ -25,6 +26,7 @@ table! {
         dob -> Nullable<Timestamp>,
         salary -> Nullable<Int4>,
         company_id -> Int4,
+        created_at -> Nullable<Timestamp>,
     }
 }
 

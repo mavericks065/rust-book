@@ -11,7 +11,8 @@ CREATE TABLE employees (
   country VARCHAR,
   dob TIMESTAMP ,
   salary integer,
-  company_id integer NOT NULL
+  company_id integer NOT NULL,
+  created_at TIMESTAMP
 );
 
 CREATE TABLE companies (
@@ -23,5 +24,6 @@ CREATE TABLE companies (
   city VARCHAR ,
   country VARCHAR,
   abn TEXT,
-  ceo_id integer REFERENCES employees(id)
+  ceo_id integer REFERENCES employees(id),
+  created_at TIMESTAMP
 );
