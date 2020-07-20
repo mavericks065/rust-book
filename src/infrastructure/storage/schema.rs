@@ -8,7 +8,7 @@ table! {
         city -> Nullable<Varchar>,
         country -> Nullable<Varchar>,
         abn -> Nullable<Text>,
-        ceo_id -> Int4,
+        ceo_id -> Nullable<Int4>,
     }
 }
 
@@ -22,7 +22,15 @@ table! {
         post_code -> Nullable<Int4>,
         city -> Nullable<Varchar>,
         country -> Nullable<Varchar>,
-        dob -> Nullable<Date>,
-        salary -> Nullable<Int8>,
+        dob -> Nullable<Timestamp>,
+        salary -> Nullable<Int4>,
+        company_id -> Int4,
     }
 }
+
+joinable!(companies -> employees (ceo_id));
+
+allow_tables_to_appear_in_same_query!(
+    companies,
+    employees,
+);

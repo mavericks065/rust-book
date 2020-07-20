@@ -1,6 +1,7 @@
 use diesel::sql_types::Date;
+use crate::infrastructure::storage::schema::{companies, employees};
 
-#[derive(Identifiable, Queryable, Associations, PartialEq, Debug)]
+#[derive(Identifiable, Queryable, Associations, Debug)]
 #[table_name = "companies"]
 pub struct Company {
     pub id: i32,
@@ -11,10 +12,10 @@ pub struct Company {
     pub city: String,
     pub country: String,
     pub abn: String,
-    pub cea_id: i32
+    pub ceo_id: i32
 }
 
-#[derive(Identifiable, Queryable, Associations, PartialEq, Debug)]
+#[derive(Identifiable, Queryable, Associations, Debug)]
 #[table_name = "employees"]
 pub struct Employee {
     pub id: i32,
@@ -27,5 +28,6 @@ pub struct Employee {
     pub country: String,
     pub abn: String,
     pub dob: Date,
-    pub salary: i16
+    pub salary: i16,
+    pub company_id: i32
 }
