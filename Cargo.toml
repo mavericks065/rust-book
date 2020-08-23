@@ -1,5 +1,5 @@
 [package]
-name = "rust_book"
+name = "rust_followup"
 version = "0.1.0"
 authors = ["nicolas <nicolas065@gmail.com>"]
 edition = "2018"

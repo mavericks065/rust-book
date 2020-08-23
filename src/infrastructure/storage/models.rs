@@ -2,6 +2,7 @@ use diesel::sql_types::Date;
 use crate::infrastructure::storage::schema::{companies, employees};
 use chrono::NaiveDateTime;
 use std::collections::LinkedList;
+use std::iter::Map;
 
 #[derive(Identifiable, Queryable, Associations, Debug)]
 #[table_name = "companies"]
@@ -33,16 +34,16 @@ pub struct Employee {
     pub dob: Date,
     pub salary: i16,
     pub company_id: i32,
-    pub managees: Vector<Book>,
+    pub follow_up_ids: Vector<i64>,
     pub created_at: NaiveDateTime
 }
 
 #[derive(Identifiable, Queryable, Associations, Debug)]
-#[table_name = "employees"]
-pub struct Book {
+#[table_name = "follow_ups"]
+pub struct FollowUp {
     pub id: i64,
-    pub managee: i32,
-    pub check_points: LinkedList<CheckPoint>
+    pub managee_id: i32,
+    pub check_points_ids: LinkedList<Int32>
 }
 
 #[derive(Identifiable, Queryable, Associations, Debug)]
