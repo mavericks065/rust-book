@@ -1,8 +1,9 @@
-extern crate rust_book;
-
-use self::rust_book::infrastructure::webapi::handler;
+extern crate rust_followup;
 
 extern crate diesel;
+
+use self::rust_followup::infrastructure::webapi::handler;
+use rust_followup::infrastructure::webapi::dtos::NewCompany;
 
 use diesel::prelude::*;
 use diesel::pg::PgConnection;
@@ -10,7 +11,6 @@ use dotenv::dotenv;
 use std::env;
 
 use warp::{self, http, Filter, Rejection, reject};
-use rust_book::infrastructure::webapi::dtos::NewCompany;
 
 fn establish_connection(database_url: &str) -> PgConnection {
     PgConnection::establish(database_url)
