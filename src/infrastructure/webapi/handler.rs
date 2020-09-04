@@ -1,22 +1,25 @@
 use crate::infrastructure::webapi::dtos::{CompanyDto, NewCompany};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
+use diesel::r2d2::{Pool, ConnectionManager, PooledConnection};
 use diesel::PgConnection;
 use tokio::macros::support::Future;
-use warp::{http::StatusCode, reject, reply::json, Rejection, Reply};
+use warp::{http, reject, reply::json, Rejection, Reply, http::StatusCode};
+use warp::reply::Response;
 
-pub fn health_handler() -> String {
+pub async fn health_handler(_: Pool<ConnectionManager<PgConnection>>) -> Result<impl Reply, Rejection> {
     let result = "health check: all good";
-    result.to_string()
+    Ok(warp::reply::with_status(result, http::StatusCode::OK))
 }
 
-pub fn create_new_company(
+pub async fn create_new_company(
     new_company: NewCompany,
-    connection: &PooledConnection<ConnectionManager<PgConnection>>,
-) -> CompanyDto {
-    CompanyDto {
-        name: String::from(""),
+    connection: Pool<ConnectionManager<PgConnection>>,
+) -> Result<impl Reply, Rejection> {
+    let fake_result = CompanyDto {
+        name: String::from("YO"),
         description: String::from(" "),
         full_address: String::from(""),
         abn: String::from(""),
-    }
+    };
+
+    Ok(json(&fake_result))
 }

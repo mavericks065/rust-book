@@ -56,9 +56,4 @@ table! {
 joinable!(companies -> employees (ceo_id));
 joinable!(follow_ups -> employees (managee_id));
 
-allow_tables_to_appear_in_same_query!(
-    check_points,
-    companies,
-    employees,
-    follow_ups,
-);
+allow_tables_to_appear_in_same_query!(check_points, companies, employees, follow_ups,);

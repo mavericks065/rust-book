@@ -1,4 +1,4 @@
-use serde::{Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct NewCompany {
@@ -11,7 +11,7 @@ pub struct NewCompany {
     pub abn: String,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct CompanyDto {
     pub name: String,
     pub description: String,

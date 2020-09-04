@@ -1,6 +1,6 @@
-use diesel::sql_types::Date;
-use crate::infrastructure::storage::schema::{companies, employees, follow_ups, check_points};
+use crate::infrastructure::storage::schema::{check_points, companies, employees, follow_ups};
 use chrono::NaiveDateTime;
+use diesel::sql_types::Date;
 use std::collections::LinkedList;
 
 #[derive(Identifiable, Queryable, Associations, Debug)]
@@ -15,7 +15,7 @@ pub struct Company {
     pub country: String,
     pub abn: String,
     pub ceo_id: i32,
-    pub created_at: NaiveDateTime
+    pub created_at: NaiveDateTime,
 }
 
 #[derive(Identifiable, Queryable, Associations, Debug)]
@@ -34,7 +34,7 @@ pub struct Employee {
     pub salary: i16,
     pub company_id: i32,
     pub follow_up_ids: Vec<i64>,
-    pub created_at: NaiveDateTime
+    pub created_at: NaiveDateTime,
 }
 
 #[derive(Identifiable, Queryable, Associations, Debug)]
@@ -42,7 +42,7 @@ pub struct Employee {
 pub struct FollowUp {
     pub id: i64,
     pub managee_id: i32,
-    pub check_points_ids: LinkedList<i64>
+    pub check_points_ids: LinkedList<i64>,
 }
 
 #[derive(Identifiable, Queryable, Associations, Debug)]
@@ -56,6 +56,5 @@ pub struct CheckPoint {
     pub mood: i8,
     pub goals: String,
     pub previous_actions_status: String,
-    pub check_point_date: NaiveDateTime
+    pub check_point_date: NaiveDateTime,
 }
-
