@@ -1,4 +1,6 @@
-use crate::infrastructure::webapi::dtos::{CompanyDto, NewCompany};
+use crate::domain::company::port::ports::NewCompany;
+use crate::infrastructure::webapi::dtos::CompanyResponse;
+
 use diesel::r2d2::{Pool, ConnectionManager, PooledConnection};
 use diesel::PgConnection;
 use tokio::macros::support::Future;
@@ -14,7 +16,7 @@ pub async fn create_new_company(
     new_company: NewCompany,
     connection: Pool<ConnectionManager<PgConnection>>,
 ) -> Result<impl Reply, Rejection> {
-    let fake_result = CompanyDto {
+    let fake_result = CompanyResponse {
         name: String::from("YO"),
         description: String::from(" "),
         full_address: String::from(""),
