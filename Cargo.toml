@@ -8,8 +8,8 @@ description = "backend for employee management by a company"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio = { version = "0.2", features = ["macros"] }
-warp = "0.2"
+rocket = "0.4.2"
+uuid = { version = "0.8", features = ["serde", "v4"] }
 serde = {version = "1.0", features = ["derive"] }
 serde_derive = "1.0"
 serde_json = "1.0"
@@ -18,7 +18,12 @@ diesel = { version = "1.4.4", features = ["postgres", "r2d2"] }
 dotenv = "0.15.0"
 chrono = { version = "0.4.6", features = ["serde"] }
 
-[dev-dependencies.cargo-husky]
-version = "1"
-default-features = false # Disable features which are enabled by default
-features = ["precommit-hook",  "run-cargo-fmt", "run-cargo-clippy"]
+[dependencies.rocket_contrib]
+version = "0.4"
+default-features = false
+features = ["json", "diesel_postgres_pool"]
+
+#[dev-dependencies.cargo-husky]
+#version = "1"
+#default-features = false # Disable features which are enabled by default
+#features = ["run-cargo-clippy"] #"precommit-hook", "run-cargo-fmt",
