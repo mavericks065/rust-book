@@ -2,16 +2,17 @@ extern crate rust_followup;
 
 extern crate diesel;
 
-use self::rust_followup::infrastructure::webapi::handler;
-use rust_followup::infrastructure::webapi::dtos::NewCompany;
+use rust_followup::domain::company::dao::dao_port::CompanyDao;
+use rust_followup::domain::company::interactor::company_interactor::CompanyInteractor;
+use rust_followup::infrastructure::web_api::web_server;
+use rust_followup::infrastructure::web_api::dtos::CompanyResponse;
 
 use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool, PoolError, PooledConnection};
-use dotenv::dotenv;
+use dotenv::{dotenv};
 use std::env;
+use std::result::Result;
 use std::convert::Infallible;
-
-use warp::{self, http, reject, Filter, Rejection, http::Response};
 
 pub fn establish_connection() -> PgPool {
     dotenv().ok();
@@ -19,7 +20,7 @@ pub fn establish_connection() -> PgPool {
     init_pool(&database_url).expect("Failed to create pool")
 }
 
-fn init_pool(database_url: &str) -> Result<PgPool, PoolError> {
+fn init_pool(database_url: &str) -> std::result::Result<PgPool, PoolError> {
     let manager = ConnectionManager::<PgConnection>::new(database_url);
     Pool::builder().build(manager)
 }
@@ -31,30 +32,6 @@ fn get_pg_connection(pg_pool: PgPool) -> PgPooledConnection {
 pub type PgPool = Pool<ConnectionManager<PgConnection>>;
 pub type PgPooledConnection = PooledConnection<ConnectionManager<PgConnection>>;
 
-fn with_db(db_pool: PgPool) -> impl Filter<Extract=(PgPool, ), Error=Infallible> + Clone {
-    warp::any().map(move || db_pool.clone())
+fn main() {
+    web_server::start_server()
 }
-
-#[tokio::main]
-async fn main() {
-    let pool = establish_connection();
-    let companies_route = warp::path("companies")
-        .and(warp::post()
-            .and(warp::body::json())
-            .and(with_db(pool.clone()))
-            .and_then(handler::create_new_company)
-        );
-
-    let status_route = warp::path("status")
-        .and(warp::get()
-            .and(with_db(pool.clone()))
-            .and_then(handler::health_handler)
-        );
-
-    let hello_route = warp::path("hello").map(|| "Hello, World!");
-
-    let routes = status_route.or(hello_route).or(companies_route);
-
-    warp::serve(routes).run(([127, 0, 0, 1], 8000)).await;
-}
-

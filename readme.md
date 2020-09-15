@@ -14,3 +14,12 @@ For Warp the examples followed come from the following links:
 * https://github.com/seanmonstar/warp/blob/master/examples/todos.rs
 * https://www.reddit.com/r/rust/comments/9e745k/a_full_stack_app_with_backend_made_using_diesel/
 * https://github.com/ManifoldFR/rustfullstack/blob/master/src/main.rs
+
+
+For Rocket:
+* https://github.com/KodrAus/rust-web-app/blob/master/src/main.rs
+* https://github.com/SergioBenitez/Rocket/blob/master/examples/todo/src/main.rs
+* guards: https://docs.rs/rocket_contrib/0.4.0-rc.2/rocket_contrib/databases/index.html
+* Json requests: https://rocket.rs/v0.4/guide/requests/#json
+* Json example: https://github.com/SergioBenitez/Rocket/blob/v0.4/examples/json/src/main.rs
+*  

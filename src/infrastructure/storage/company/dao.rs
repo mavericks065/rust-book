@@ -1,15 +1,10 @@
 use crate::domain::company::dao::dao_port::CompanyDao;
 use crate::domain::company::model::company::Company;
 use std::error::Error;
-use chrono::{Utc};
-use serde::{Deserialize};
+use chrono::Utc;
 
-pub struct CompanyInteractor {
-    pub dao: Box<dyn CompanyDao>
-}
-
-impl CompanyInteractor {
-    pub fn create_company(&self, new_company: NewCompanyRequest) -> Result<Company, Box<dyn Error>> {
+impl CompanyDao {
+    pub fn create_company(&self, company: Company) -> Result<Company, Box<dyn Error>> {
         Ok(Company {
             id: Option::Some(1),
             name: String::from("name"),
@@ -25,14 +20,3 @@ impl CompanyInteractor {
     }
 }
 
-
-#[derive(Debug, Clone, Deserialize)]
-pub struct NewCompanyRequest {
-    pub name: String,
-    pub description: String,
-    pub address: String,
-    pub post_code: i8,
-    pub city: String,
-    pub country: String,
-    pub abn: String,
-}
