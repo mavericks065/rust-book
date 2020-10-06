@@ -16,14 +16,14 @@ table! {
     companies (id) {
         id -> Int4,
         name -> Varchar,
-        description -> Nullable<Text>,
-        address -> Nullable<Text>,
-        post_code -> Nullable<Int4>,
-        city -> Nullable<Varchar>,
-        country -> Nullable<Varchar>,
+        description -> Text,
+        address -> Text,
+        post_code -> Int4,
+        city -> Varchar,
+        country -> Varchar,
         abn -> Nullable<Text>,
         ceo_id -> Nullable<Int4>,
-        created_at -> Nullable<Timestamp>,
+        created_at -> Timestamp,
     }
 }
 
@@ -56,4 +56,9 @@ table! {
 joinable!(companies -> employees (ceo_id));
 joinable!(follow_ups -> employees (managee_id));
 
-allow_tables_to_appear_in_same_query!(check_points, companies, employees, follow_ups,);
+allow_tables_to_appear_in_same_query!(
+    check_points,
+    companies,
+    employees,
+    follow_ups,
+);
