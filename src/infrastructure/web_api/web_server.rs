@@ -1,5 +1,4 @@
-use rocket::http::Method;
-use rocket::{response::content, Rocket, State};
+use rocket::Rocket;
 
 use crate::infrastructure::web_api::handler::static_rocket_route_info_for_health_check;
 use crate::infrastructure::web_api::company_handler::static_rocket_route_info_for_create_company;

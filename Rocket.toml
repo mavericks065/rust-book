@@ -3,4 +3,4 @@ address = "0.0.0.0"
 
 
 [global.databases]
-master = { url = "postgres://localhost/postgres", pool_size = 10 }
+master = { url = "postgres://postgres:mysecretpassword@localhost:5432/postgres", pool_size = 10 }

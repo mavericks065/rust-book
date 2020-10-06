@@ -5,7 +5,7 @@ pub struct Company {
     pub name: String,
     pub description: String,
     pub address: String,
-    pub post_code: i32,
+    pub post_code: u64,
     pub city: String,
     pub country: String,
     pub abn: Option<String>,
