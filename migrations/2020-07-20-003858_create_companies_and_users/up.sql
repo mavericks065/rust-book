@@ -2,7 +2,7 @@
 
 CREATE TABLE employees
 (
-    id         integer PRIMARY KEY,
+    id         SERIAL PRIMARY KEY,
     email      VARCHAR NOT NULL,
     firsname   VARCHAR NOT NULL,
     lastname   VARCHAR NOT NULL,
@@ -12,13 +12,13 @@ CREATE TABLE employees
     country    VARCHAR,
     dob        TIMESTAMP,
     salary     integer,
-    company_id integer NOT NULL,
+    company_id serial NOT NULL,
     created_at TIMESTAMP
 );
 
 CREATE TABLE companies
 (
-    id          integer PRIMARY KEY,
+    id          SERIAL PRIMARY KEY,
     name        VARCHAR   NOT NULL,
     description TEXT      NOT NULL,
     address     TEXT      NOT NULL,

@@ -1,7 +1,7 @@
 -- Your SQL goes here
 CREATE TABLE check_points (
-    id integer PRIMARY KEY,
-    comments TEXT,
+    id serial PRIMARY KEY,
+    comments text,
     manager_actions text,
     managee_actions Text,
     highlights Text,
@@ -12,7 +12,7 @@ CREATE TABLE check_points (
 );
 
 CREATE TABLE follow_ups (
-   id integer  PRIMARY KEY,
-   managee_id integer REFERENCES employees(id),
-   check_points_ids integer[]
+   id serial PRIMARY KEY,
+   managee_id serial REFERENCES employees(id),
+   check_points_ids bigint[]
 );

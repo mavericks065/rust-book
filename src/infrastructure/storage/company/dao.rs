@@ -9,7 +9,7 @@ use crate::infrastructure::storage::schema::companies::dsl::companies;
 use diesel::associations::HasTable;
 use crate::infrastructure::storage::entity_models::{CompanyEntity, NewCompanyEntity};
 use diesel::RunQueryDsl;
-use std::time::SystemTime;
+use std::time::{SystemTime, Instant};
 
 pub struct DieselCompanyDao {
     connection: PooledConnection<ConnectionManager<PgConnection>>
@@ -23,18 +23,6 @@ impl DieselCompanyDao {
 
 impl CompanyDaoTrait for DieselCompanyDao {
     fn create_company(&self, company: Company) -> Result<Company, Box<dyn Error>> {
-        // let company_entity = CompanyEntity {
-        //     id: Option::None,
-        //     name: company.name,
-        //     description: company.description,
-        //     address: company.address,
-        //     post_code: company.post_code,
-        //     city: company.city,
-        //     country: company.country,
-        //     abn: company.abn,
-        //     ceo_id: company.ceo_id,
-        //     created_at: company.created_at,
-        // };
         let company_entity = NewCompanyEntity {
             name: &company.name,
             description: &company.description,
@@ -43,9 +31,13 @@ impl CompanyDaoTrait for DieselCompanyDao {
             city: &company.city,
             country: &company.country,
         };
+        println!("CompanyDaoTrait BEFORE INSERT {}", company_entity.name);
+
         let insert_entity: Result<CompanyEntity, diesel::result::Error> = diesel::insert_into(companies::table())
             .values(company_entity)
             .get_result(&self.connection);
+        println!("CompanyDaoTrait new company {}", insert_entity.unwrap().name);
+
         Ok(Company {
             id: Option::Some(2),
             name: String::from("SUPER COMPANY"),

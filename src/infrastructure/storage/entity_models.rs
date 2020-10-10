@@ -1,15 +1,14 @@
 use crate::infrastructure::storage::schema::{check_points, companies, employees, follow_ups};
-use chrono::NaiveDateTime;
 use diesel::sql_types::Date;
 use std::collections::LinkedList;
 use std::time::SystemTime;
 
 #[derive(Identifiable, Queryable, PartialEq, Associations, Debug)]
 #[table_name = "companies"]
-pub struct CompanyEntity {
+pub struct CompanyEntity{
     pub id: i32,
     pub name: String,
-    pub description: String,
+    pub description:String,
     pub address: String,
     pub post_code: i32,
     pub city: String,
@@ -41,10 +40,10 @@ pub struct EmployeeEntity {
     pub post_code: i32,
     pub city: String,
     pub country: String,
-    pub dob: Date,
+    pub dob: SystemTime,
     pub salary: i32,
     pub company_id: i32,
-    pub follow_up_ids: Vec<i64>,
+    pub follow_up_ids: Vec<i32>,
     pub created_at: SystemTime,
 }
 
@@ -53,7 +52,7 @@ pub struct EmployeeEntity {
 pub struct FollowUpEntity {
     pub id: i32,
     pub managee_id: i32,
-    pub check_points_ids: LinkedList<u64>,
+    pub check_points_ids: LinkedList<i32>,
 }
 
 #[derive(Identifiable, Queryable, PartialEq, Associations, Debug)]

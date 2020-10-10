@@ -41,15 +41,15 @@ table! {
         salary -> Nullable<Int4>,
         company_id -> Int4,
         created_at -> Nullable<Timestamp>,
-        follow_up_ids -> Nullable<Array<Int4>>,
+        follow_up_ids -> Nullable<Array<Int8>>,
     }
 }
 
 table! {
     follow_ups (id) {
         id -> Int4,
-        managee_id -> Nullable<Int4>,
-        check_points_ids -> Nullable<Array<Int4>>,
+        managee_id -> Int4,
+        check_points_ids -> Nullable<Array<Int8>>,
     }
 }
 
