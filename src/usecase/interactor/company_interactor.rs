@@ -3,8 +3,8 @@ use std::error::Error;
 use chrono::Utc;
 use serde::Deserialize;
 
-use crate::domain::company::dao::company_dao_port::CompanyDaoTrait;
-use crate::domain::company::model::company::Company;
+use crate::domain::company::company::Company;
+use crate::usecase::dao::company_dao_port::CompanyDaoTrait;
 
 pub struct CompanyInteractor {
     pub dao: Box<dyn CompanyDaoTrait>

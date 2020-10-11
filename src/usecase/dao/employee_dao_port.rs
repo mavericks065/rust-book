@@ -1,4 +1,4 @@
-use crate::domain::employee::model::employee::Employee;
+use crate::domain::employee::employee::Employee;
 use std::error::Error;
 
 pub trait EmployeeDaoTrait {

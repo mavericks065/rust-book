@@ -3,8 +3,8 @@ use std::time::SystemTime;
 
 use serde::Deserialize;
 
-use crate::domain::employee::dao::employee_dao_port::EmployeeDaoTrait;
-use crate::domain::employee::model::employee::Employee;
+use crate::usecase::dao::employee_dao_port::EmployeeDaoTrait;
+use crate::domain::employee::employee::Employee;
 
 pub struct EmployeeInteractor {
     pub employee_dao: Box<dyn EmployeeDaoTrait>

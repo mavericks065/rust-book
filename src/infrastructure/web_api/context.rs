@@ -1,13 +1,12 @@
-use crate::domain::company::interactor::company_interactor::CompanyInteractor;
-
 use diesel::pg::PgConnection;
 use diesel::r2d2::{ConnectionManager, PooledConnection};
+use rocket::request::{FromRequest, Outcome, Request};
 
-use rocket::request::{FromRequest, Request, Outcome};
 use crate::infrastructure::persistence::company::dao::DieselCompanyDao;
-use crate::infrastructure::web_api::web_server::DbCon;
-use crate::domain::employee::interactor::employee_interactor::EmployeeInteractor;
 use crate::infrastructure::persistence::employee::dao::DieselEmployeeDao;
+use crate::infrastructure::web_api::web_server::DbCon;
+use crate::usecase::interactor::company_interactor::CompanyInteractor;
+use crate::usecase::interactor::employee_interactor::EmployeeInteractor;
 
 pub struct Context {
     pub company_interactor: CompanyInteractor,

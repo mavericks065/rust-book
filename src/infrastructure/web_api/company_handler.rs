@@ -1,8 +1,8 @@
 use rocket_contrib::json::Json;
 
-use crate::domain::company::interactor::company_interactor::NewCompanyRequest;
 use crate::infrastructure::web_api::context::Context;
-use crate::infrastructure::web_api::dtos::CompanyResponse;
+use crate::usecase::interactor::company_interactor::NewCompanyRequest;
+use crate::usecase::presenter::company_presenter::CompanyResponse;
 
 #[post("/companies", format = "json", data = "<company>")]
 pub fn create_company(company: Json<NewCompanyRequest>, context: Context) -> Json<CompanyResponse> {

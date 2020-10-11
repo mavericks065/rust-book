@@ -1,4 +1,4 @@
-use crate::domain::company::model::company::Company;
+use crate::domain::company::company::Company;
 use std::error::Error;
 
 pub trait CompanyDaoTrait {
