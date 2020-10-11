@@ -7,3 +7,10 @@ pub struct CompanyResponse {
     pub full_address: String,
     pub abn: Option<String>,
 }
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct EmployeeResponse {
+    pub firstname: String,
+    pub lastname: String,
+    pub email: String,
+}

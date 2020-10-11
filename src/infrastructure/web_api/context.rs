@@ -6,9 +6,12 @@ use diesel::r2d2::{ConnectionManager, PooledConnection};
 use rocket::request::{FromRequest, Request, Outcome};
 use crate::infrastructure::storage::company::dao::DieselCompanyDao;
 use crate::infrastructure::web_api::web_server::DbCon;
+use crate::domain::employee::interactor::employee_interactor::EmployeeInteractor;
+use crate::infrastructure::storage::employee::dao::DieselEmployeeDao;
 
 pub struct Context {
-    pub company_interactor: CompanyInteractor
+    pub company_interactor: CompanyInteractor,
+    pub employee_interactor: EmployeeInteractor,
 }
 
 impl<'a, 'r> FromRequest<'a, 'r> for Context {
@@ -16,20 +19,27 @@ impl<'a, 'r> FromRequest<'a, 'r> for Context {
 
     fn from_request(request: &'a Request<'r>) -> Outcome<Self, Self::Error> {
         let db_con: DbCon = request.guard::<DbCon>()?;
-        Outcome::Success(Context::new(db_con.0))
+        let db_con2: DbCon = request.guard::<DbCon>()?;
+        Outcome::Success(Context::new(db_con.0, db_con2))
     }
 }
 
 impl Context {
     pub fn new(
         connection: PooledConnection<ConnectionManager<PgConnection>>,
+        connection2: PooledConnection<ConnectionManager<PgConnection>>,
     ) -> Context {
         let diesel_company_dao = DieselCompanyDao::new(connection);
-        let my_comp_interactor= CompanyInteractor {
+        let company_interactor= CompanyInteractor {
             dao: Box::new(diesel_company_dao)
         };
+        let diesel_employee_dao = DieselEmployeeDao::new(connection2);
+        let employee_interactor= EmployeeInteractor {
+            employee_dao: Box::new(diesel_employee_dao)
+        };
         Context {
-            company_interactor: my_comp_interactor
+            company_interactor: company_interactor,
+            employee_interactor: employee_interactor,
         }
     }
 }
