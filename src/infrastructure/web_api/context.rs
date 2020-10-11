@@ -4,10 +4,10 @@ use diesel::pg::PgConnection;
 use diesel::r2d2::{ConnectionManager, PooledConnection};
 
 use rocket::request::{FromRequest, Request, Outcome};
-use crate::infrastructure::storage::company::dao::DieselCompanyDao;
+use crate::infrastructure::persistence::company::dao::DieselCompanyDao;
 use crate::infrastructure::web_api::web_server::DbCon;
 use crate::domain::employee::interactor::employee_interactor::EmployeeInteractor;
-use crate::infrastructure::storage::employee::dao::DieselEmployeeDao;
+use crate::infrastructure::persistence::employee::dao::DieselEmployeeDao;
 
 pub struct Context {
     pub company_interactor: CompanyInteractor,
@@ -20,7 +20,7 @@ impl<'a, 'r> FromRequest<'a, 'r> for Context {
     fn from_request(request: &'a Request<'r>) -> Outcome<Self, Self::Error> {
         let db_con: DbCon = request.guard::<DbCon>()?;
         let db_con2: DbCon = request.guard::<DbCon>()?;
-        Outcome::Success(Context::new(db_con.0, db_con2))
+        Outcome::Success(Context::new(db_con.0, db_con2.0))
     }
 }
 

@@ -1,5 +1,4 @@
-use crate::infrastructure::storage::schema::{check_points, companies, employees, follow_ups};
-use diesel::sql_types::Date;
+use crate::infrastructure::persistence::schema::{check_points, companies, employees, follow_ups};
 use std::collections::LinkedList;
 use std::time::SystemTime;
 

@@ -1,7 +1,9 @@
 use std::error::Error;
 use std::time::SystemTime;
 
-use crate::domain::employee::dao::dao_port::EmployeeDaoTrait;
+use serde::Deserialize;
+
+use crate::domain::employee::dao::employee_dao_port::EmployeeDaoTrait;
 use crate::domain::employee::model::employee::Employee;
 
 pub struct EmployeeInteractor {

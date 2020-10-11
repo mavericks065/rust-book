@@ -1,7 +1,7 @@
 
 use diesel::pg::PgConnection;
 use diesel::r2d2::{ConnectionManager, PooledConnection};
-use crate::domain::employee::dao::dao_port::EmployeeDaoTrait;
+use crate::domain::employee::dao::employee_dao_port::EmployeeDaoTrait;
 use crate::domain::employee::model::employee::Employee;
 use std::error::Error;
 

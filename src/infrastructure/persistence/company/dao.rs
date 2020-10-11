@@ -1,15 +1,14 @@
-use crate::domain::company::dao::dao_port::CompanyDaoTrait;
+use crate::domain::company::dao::company_dao_port::CompanyDaoTrait;
 use crate::domain::company::model::company::Company;
 use std::error::Error;
 use chrono::Utc;
 
 use diesel::pg::PgConnection;
 use diesel::r2d2::{ConnectionManager, PooledConnection};
-use crate::infrastructure::storage::schema::companies::dsl::companies;
+use crate::infrastructure::persistence::schema::companies::dsl::companies;
 use diesel::associations::HasTable;
-use crate::infrastructure::storage::entity_models::{CompanyEntity, NewCompanyEntity};
+use crate::infrastructure::persistence::entity_models::{CompanyEntity, NewCompanyEntity};
 use diesel::RunQueryDsl;
-use std::time::{SystemTime, Instant};
 
 pub struct DieselCompanyDao {
     connection: PooledConnection<ConnectionManager<PgConnection>>
