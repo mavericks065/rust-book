@@ -1,9 +1,10 @@
+use std::error::Error;
 
 use diesel::pg::PgConnection;
 use diesel::r2d2::{ConnectionManager, PooledConnection};
-use crate::usecase::dao::employee_dao_port::EmployeeDaoTrait;
+
 use crate::domain::employee::employee::Employee;
-use std::error::Error;
+use crate::usecase::dao::employee_dao_port::EmployeeDaoTrait;
 
 pub struct DieselEmployeeDao {
     connection: PooledConnection<ConnectionManager<PgConnection>>

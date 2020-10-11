@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct CompanyResponse {
     pub name: String,
